@@ -1,0 +1,512 @@
+/* ==UserStyle==
+@name           Deep Spotify
+@namespace      github.com/openstyles/stylus
+@version        2.0.0
+@description    Catpuccino color theme for spotify
+@author         Dan
+==/UserStyle== */
+
+// sass --no-source-map --quiet -w .\spotify-dreamy.user.scss:.\spotify-dreamy.user.css
+
+@-moz-document url-prefix("https://open.spotify.com/")
+{
+  :root {
+    /* Morning */
+    --flamingo: #f2cdcd;
+    --mauve: #ddb6f2;
+    --pink: #f5c2e7;
+    --maroon: #e8a2af;
+    --red: #f28fad;
+    --peach: #f8bd96;
+    --yellow: #fae3b0;
+    --green: #abe9b3;
+    --teal: #b5e8e0;
+    --blue: #96cdfb;
+    --sky: #89dceb;
+    /* Night */
+    --black: #0c0c1b;
+    --black-0: #161320;
+    --black-1: #1a1826;
+    --black-2: #1e1e2e;
+    --black-3: #302d41;
+    --black-4: #575268;
+    --gray-0: #6e6c7e;
+    --gray-1: #988ba2;
+    --gray-2: #c3bac6;
+    --white: #d9e0ee;
+    --lavender: #c9cbff;
+    --rosewater: #f5e0dc;
+
+    --accent: var(--lavender);
+    --highlight: var(--rosewater);
+    --levander-text: #dedffc;
+  }
+
+  /* ------------------------ Global ------------------------ */
+  /* Set global text color */
+  * {
+    -webkit-text-fill-color: var(--levander-text);
+  }
+
+  html {
+    overflow: hidden;
+  }
+
+  input {
+    -webkit-text-fill-color: var(--black-0);
+  }
+
+  /* Set color of lyrics pane */
+  * {
+    --lyrics-color-background: var(--black-3) !important;
+    --lyrics-color-active: rgb(115, 0, 255);
+    --lyrics-color-inactive: rgb(0, 149, 255);
+    --lyrics-color-messaging: rgb(251, 255, 0);
+
+    --background-base: var(--black-0) !important;
+  }
+
+  // scrollbar
+  .os-scrollbar-handle {
+    background-color: var(--accent) !important;
+    opacity: 0.6;
+
+    &:hover {
+      opacity: 0.8;
+    }
+    &.active {
+      opacity: 1;
+    }
+  }
+
+  /* explicit symbol*/
+  span[aria-label="Explicit"] {
+    background-color: var(--black-3);
+  }
+
+  /* Make main view span from to below now playing bar */
+  .Root__main-view {
+    margin-top: -8px;
+    margin-bottom: -8px;
+    grid-area: unset;
+    grid-column: 2;
+    grid-row: 1 / span 3;
+
+    .main-view-container__scroll-node-child-spacer {
+      height: 0;
+    }
+
+    main > section:not([data-testid="track-page"]),
+    main > div.GlueDropTarget:first-child > section {
+      padding-top: 4rem !important;
+      padding-bottom: 4rem !important;
+      background-color: var(--black) !important;
+    }
+  }
+
+  .Root__top-container {
+    background-color: #04040b !important;
+  }
+
+  // modal
+  .GenericModal > div {
+    background-color: var(--black-1);
+  }
+  .GenericModal > div button > span.encore-bright-accent-set {
+    -webkit-text-fill-color: var(--black-1) !important;
+  }
+
+  // right click menu
+  div[id="context-menu"] {
+    & ul {
+      border: 1px solid var(--gray-0);
+      background: var(--black-0) !important;
+    }
+  }
+
+  // tracklist item
+  div[data-testid="tracklist-row"] {
+    // play pause button
+    button {
+      color: var(--accent);
+    }
+
+    // Make graphic levander colored > https://isotropic.co/tool/hex-color-to-css-filter/
+    > div > div > img:not(img[aria-hidden="false"]) {
+      filter: brightness(0) saturate(100%) invert(87%) sepia(23%)
+        saturate(2613%) hue-rotate(188deg) brightness(105%) contrast(101%);
+    }
+  }
+
+  /* -- */
+  /* ------------------------ Buttons ------------------------ */
+  /* Set button colors using css variables */
+  .encore-dark-theme .encore-bright-accent-set {
+    --background-base: var(--accent) !important;
+    --background-highlight: var(--highlight) !important;
+    --background-press: var(--accent) !important;
+  }
+
+  /* Set color of toggleable buttons */
+  button[role="switch"],
+  .icon {
+    color: var(--accent) !important;
+  }
+
+  /* Now playing play button */
+  button[data-testid="control-button-playpause"] {
+    background-color: var(--accent);
+    color: var(--black-3);
+    transition: all 100ms ease-out;
+  }
+
+  /* Album play button */
+  button[data-testid="play-button"] > div {
+    transition: all 100ms ease-in-out;
+  }
+
+  /* Profile button */
+  button[data-testid="user-widget-link"] {
+    background-color: var(--black-0) !important;
+  }
+
+  button[data-testid="user-widget-link"]:hover {
+    background-color: var(--black-1) !important;
+  }
+
+  /* now playing control button nonsense :( */
+  .control-button--active-dot:after {
+    background-color: var(--highlight);
+  }
+
+  button[aria-label="Previous"],
+  button[aria-label="Next"],
+  button[aria-label="Enable repeat"],
+  button[aria-label="Queue"],
+  button[aria-label="Lyrics"],
+  .control-button {
+    color: var(--accent) !important;
+  }
+
+  button[aria-label="Disable repeat"],
+  button[aria-label="Enable repeat one"],
+  button[aria-label="Previous"]:hover,
+  button[aria-label="Next"]:hover,
+  button[aria-label="Enable repeat"]:hover,
+  button[aria-label="Queue"]:hover,
+  button[aria-label="Queue"][data-active="true"],
+  button[aria-label="Lyrics"][data-active="true"],
+  .control-button--active,
+  .control-button:focus,
+  .control-button:hover {
+    color: var(--highlight) !important;
+  }
+  button[aria-label="Lyrics"][data-active="true"]::after,
+  button[aria-label="Queue"][data-active="true"]::after {
+    background-color: var(--highlight);
+  }
+
+  /* -- */
+  /* ------------------------ Top bar ------------------------ */
+  .Root__top-bar {
+    margin-top: 0.5rem;
+    width: fit-content;
+    background-color: transparent;
+
+    /* Gradien on top of main view */
+    & > header {
+      & > div:first-child {
+        border-radius: 0px 8px 8px 0px !important;
+        border-top: var(--black-3) 1px solid;
+        border-right: var(--black-3) 1px solid;
+        border-bottom: var(--black-3) 1px solid;
+
+        background-color: var(--black-0-transparent) !important;
+        backdrop-filter: blur(10px);
+
+        div:not[data-testid="topbar-content-wrapper"] {
+          background-color: transparent;
+        }
+      }
+      a[aria-current="page"],
+      button:not([aria-label="Clear search field"]:not([role="checkbox"])) {
+        background-color: var(--black-4) !important;
+      }
+      & > *:not(button) {
+        order: 1 !important;
+      }
+    }
+  }
+
+  /* -- */
+  /* ------------------------ Side bar ------------------------ */
+  // Top sidebar
+  .Root__nav-bar {
+    padding: 0.5rem 0.5rem 0 0.5rem;
+    background-color: rgb(4, 4, 11);
+
+    // nav bar wrapper
+    & > div:first-child {
+      border: var(--black-3) 1px solid;
+
+      //remove downlaod now
+      & > div:last-child {
+        & > div:first-child {
+          display: none;
+        }
+
+        & > div:last-child {
+          border-radius: 8px !important;
+          overflow: hidden;
+        }
+      }
+    }
+
+    & > div > ul,
+    & > div {
+      background-color: var(--black);
+      border-radius: 8px;
+    }
+
+    // library icon colored
+    .collection-icon,
+    .collection-active-icon,
+    .search-icon,
+    .search-active-icon,
+    .home-icon,
+    .home-active-icon {
+      color: var(--accent);
+    }
+
+    /* Spotify logo */
+    div[role="banner"] {
+      display: none;
+      /* color: var(--accent); */
+    }
+  }
+
+  /* Bottom sidebar */
+  div[data-testid="rootlist-container"] {
+    button[data-testid="create-playlist-button"] > div > div {
+      background-color: var(--gray-2) !important;
+    }
+
+    border-radius: 8px;
+    .os-content {
+      background-color: var(--fake-transparent);
+      border-radius: 8px;
+    }
+
+    background-color: var(--fake-transparent);
+    // Horizontal line
+    hr {
+      visibility: hidden;
+    }
+
+    &:hover {
+      cursor: pointer;
+    }
+
+    // bottom sidebar item
+    div[data-testid="rootlist-item"]:hover span {
+      -webkit-text-fill-color: var(--highlight) !important;
+    }
+
+    // playing indicator
+    button[aria-label="Playing"] {
+      color: var(--highlight);
+    }
+  }
+
+  /* -- */
+  /* ------------------------ Main view ------------------------ */
+  .Root__main-view {
+    .os-scrollbar {
+      padding-bottom: 5rem;
+    }
+
+    section[data-testid="home-page"] {
+      background-color: var(--black);
+
+      /* Album element */
+      div[data-testid="grid-container"] > div {
+        background-color: var(--black-2);
+
+        &:hover,
+        &[data-context-menu-open="true"],
+        &:focus-within {
+          background-color: var(--black-3);
+        }
+      }
+
+      // Quick links on top of home page
+      &
+        > div:first-child
+        > div:first-child
+        > section:first-child
+        > div:nth-child(2)
+        > div {
+        background-color: var(--black-3);
+
+        &:hover {
+          background-color: var(--black-4);
+        }
+      }
+    }
+
+    div[style="top: 64px;"] {
+      display: none;
+    }
+  }
+
+  /* -- */
+  /* ------------------------ Now playing bar ------------------------ */
+  .Root__now-playing-bar {
+    padding: 0.5rem 0rem 0.5rem 0.5rem;
+
+    footer {
+      border-top: var(--black-3) 1px solid;
+      border-bottom: var(--black-3) 1px solid;
+      border-left: var(--black-3) 1px solid;
+      border-radius: 8px 0px 0px 8px;
+      background: #111124a1 !important;
+      backdrop-filter: blur(10px);
+    }
+
+    // Progress bar colors
+    div[data-testid="progress-bar"] {
+      --is-active-fg-color: var(--highlight);
+      --bg-color: var(--black-4);
+      --fg-color: var(--accent);
+    }
+
+    // add some padding to the right
+    footer[data-testid="now-playing-bar"] > div:nth-child(1) {
+      padding-right: 1rem;
+    }
+
+    /* Playing on device bar */
+    footer[data-testid="now-playing-bar"] > div:nth-child(2) > div {
+      background-color: var(--accent);
+      border-radius: 8px 0px 0px 8px;
+      -webkit-text-fill-color: var(--black-1) !important;
+    }
+
+    footer[data-testid="now-playing-bar"] > div:nth-child(2) > div > svg {
+      color: var(--black-1);
+    }
+
+    /* Connect to a device modal */
+    .connect-device-list-container {
+      background-color: var(--black-0);
+      .connect-device-list button {
+        background-color: var(--black-0);
+      }
+
+      // little arrow
+      &::before {
+        border-top-color: var(--black-0);
+      }
+
+      // Make graphic flamingo colored > https://isotropic.co/tool/hex-color-to-css-filter/
+      .connect-header__image {
+        background-color: transparent;
+        filter: brightness(0) saturate(100%) invert(98%) sepia(50%)
+          saturate(635%) hue-rotate(293deg) brightness(101%) contrast(92%);
+      }
+
+      .connect-device-list-item__icon * {
+        color: var(--accent);
+      }
+
+      .connect-device-list-item--active * {
+        color: var(--highlight);
+      }
+
+      .connect-device-list-item:focus,
+      .connect-device-list-item:hover {
+        background-color: var(--black-3);
+      }
+    }
+  }
+
+  /* -- */
+  /* ------------------------ Search page ------------------------ */
+
+  //fix search chips
+  main[aria-label="Spotify – Search"] {
+    & > div:first-child {
+      top: 85px;
+      width: fit-content;
+      border-radius: 0px 8px 8px 0px !important;
+    }
+    button[role="checkbox"] {
+      background-color: var(--black-2);
+
+      &:hover {
+        background-color: var(--black-3);
+      }
+    }
+  }
+
+  #searchPage {
+    & > div > div {
+      padding-top: 5rem;
+      padding-bottom: 5rem;
+    }
+  }
+
+  div[aria-label="Search"] {
+    & > div {
+      border-radius: 10px;
+      background-color: var(--black-0-transparent);
+      backdrop-filter: blur(10px);
+    }
+    input[placeholder] {
+      -webkit-text-fill-color: var(--black-0) !important;
+    }
+    & > div > div {
+      background-color: transparent;
+    }
+  }
+
+  /* -- */
+  /* ------------------------ More pages ------------------------ */
+  main[aria-label="Spotify – Play Queue"] {
+    margin-top: -6rem;
+    padding-top: 6rem;
+    padding-bottom: 4rem;
+    background-color: var(--black-0);
+  }
+  main[aria-label="Your Episodes"] {
+    background-color: var(--black) !important;
+  }
+  main[aria-label="Spotify – Your Library"] {
+    background-color: var(--black);
+
+    section.contentSpacing div[data-testid="grid-container"] > div {
+      background-color: var(--black-2);
+
+      &:hover,
+      &[data-context-menu-open="true"],
+      &:focus-within {
+        background-color: var(--black-3);
+      }
+    }
+  }
+
+  main > section[data-testid="track-page"] {
+    background-color: var(--black);
+  }
+
+  //lyrics
+  .esRByMgBY3TiENAsbDHA {
+    padding-top: 6rem;
+  }
+}
+
+/* -- */
+/* ------------------------ Footer ------------------------ */
+nav.Footer__StyledFooter-sc-xwm5vq-0 {
+  background-color: var(--black);
+}
